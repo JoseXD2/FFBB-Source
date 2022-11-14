@@ -154,7 +154,7 @@ class Paths
 		gottenPath = gottenPath.substring(gottenPath.indexOf(':') + 1, gottenPath.length);
 		// trace(gottenPath);
 		if (!currentTrackedSounds.exists(gottenPath))
-			currentTrackedSounds.set(gottenPath, Sound.fromFile('./' + gottenPath));
+			currentTrackedSounds.set(gottenPath, Sound.fromFile(gottenPath));
 		localTrackedAssets.push(key);
 		return currentTrackedSounds.get(gottenPath);
 	}
@@ -219,7 +219,7 @@ class Paths
 
 	inline static function getPreloadPath(file:String) {
 		var returnPath:String = 'assets/$file';
-		if (!FileSystem.exists(returnPath))
+		if (!OpenFlAssets.exists(returnPath))
 			returnPath = CoolUtil.swapSpaceDash(returnPath);
 		return returnPath;
 	}
@@ -284,7 +284,7 @@ class Paths
 
 	inline static public function getSparrowAtlas(key:String, ?library:String) {
 		var graphic:FlxGraphic = returnGraphic(key, library);
-		return (FlxAtlasFrames.fromSparrow(graphic, File.getContent(file('images/$key.xml', library))));
+		return (FlxAtlasFrames.fromSparrow(graphic, OpenFlAssets.getText(file('images/$key.xml', library))));
 	}
 
 	inline static public function getPackerAtlas(key:String, ?library:String)
