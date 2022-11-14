@@ -137,7 +137,7 @@ class CreditState extends MusicBeatState
 		FlxG.mouse.useSystemCursor = true;
 	    
 	        #if android
-		addVirtualPad(UP_DOWN, A_B);
+		addVirtualPad(NONE, B);
 		#end
     }
 
