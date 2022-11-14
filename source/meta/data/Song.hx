@@ -2,7 +2,7 @@ package meta.data;
 
 import haxe.Json;
 import haxe.format.JsonParser;
-import lime.utils.Assets;
+import lime.utils.Assets as OpenFlAssets;
 import meta.data.Section.SwagSection;
 import sys.io.File;
 
@@ -43,7 +43,7 @@ class Song
 
 	public static function loadFromJson(jsonInput:String, ?folder:String):SwagSong
 	{
-		var rawJson = File.getContent(Paths.songJson(folder.toLowerCase(), jsonInput.toLowerCase())).trim();
+		var rawJson = OpenFlAssets.getText(Paths.songJson(folder.toLowerCase(), jsonInput.toLowerCase())).trim();
 
 		while (!rawJson.endsWith("}"))
 			rawJson = rawJson.substr(0, rawJson.length - 1);
