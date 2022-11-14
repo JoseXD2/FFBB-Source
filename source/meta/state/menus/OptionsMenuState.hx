@@ -46,7 +46,7 @@ class OptionsMenuState extends MusicBeatState
 
 		// NOTE : Make sure to check Init.hx if you are trying to add options.
 
-		#if !html5
+		#if !android
 		Discord.changePresence('Changing Options', 'Option Menu', " ", TitleState.titleImage);
 		#end
 
@@ -54,6 +54,7 @@ class OptionsMenuState extends MusicBeatState
 			'main' => [
 				[
 					['Gameplay', callNewGroup],
+					#if android ['android controls', openAndroidControlmenu],#end
 					['Accessibility', callNewGroup],
 					['Controls', openControlmenu],
 					['Exit', exitMenu]
@@ -130,6 +131,10 @@ class OptionsMenuState extends MusicBeatState
 		add(infoText);
 
 		loadSubgroup('main');
+		
+		#if android
+		addVirtualPad(LEFT_FULL, A_B);
+		#end
 	}
 
 	private var currentAttachmentMap:Map<FlxText, Dynamic>;
@@ -555,6 +560,24 @@ class OptionsMenuState extends MusicBeatState
 		}
 	}
 
+	#if android
+	public function openAndroidControlmenu()
+	{
+		if (controls.ACCEPT)
+		{
+			FlxG.sound.play(Paths.sound('confirmMenu'));
+			lockedMovement = true;
+			FlxFlicker.flicker(activeSubgroup.members[curSelection], 0.5, 0.06 * 2, true, false, function(flick:FlxFlicker)
+			{
+				#if android
+				removeVirtualPad();
+				#end
+				openSubState(new android.AndroidControlsSubState());
+				lockedMovement = false;
+			});
+		}
+	}
+	#end
 	public function exitMenu()
 	{
 		//
