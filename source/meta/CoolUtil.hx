@@ -5,9 +5,7 @@ import meta.state.PlayState;
 
 using StringTools;
 
-#if !html5
-import sys.FileSystem;
-#end
+
 
 class CoolUtil
 {
@@ -64,15 +62,15 @@ class CoolUtil
 	{
 		//
 		var libraryArray:Array<String> = [];
-		#if !html5
-		var unfilteredLibrary = FileSystem.readDirectory('$subDir/$library');
+		var list = Assets.list()
+		var unfilteredLibrary = list.filter(text -> text.contains('$subDir/$library');
 
 		for (folder in unfilteredLibrary)
 		{
 			if (!folder.contains('.'))
 				libraryArray.push(folder);
 		}
-		#end
+		
 
 		return libraryArray;
 	}
