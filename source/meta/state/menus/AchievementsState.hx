@@ -52,7 +52,7 @@ class AchievementsState extends MusicBeatState
     {
         super.create();
 
-		#if !html5
+		#if !android
 		Discord.changePresence('Scrolling In The Achievements', 'Achievement Screen', " ", TitleState.titleImage);
 		#end
 
@@ -118,6 +118,10 @@ class AchievementsState extends MusicBeatState
 		add(description);
 
 		changeSelection();
+	    
+	        #if android
+		addVirtualPad(UP_DOWN, B);
+		#end
     }
 
 	override function update(elapsed:Float)
