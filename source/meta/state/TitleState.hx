@@ -92,19 +92,7 @@ class TitleState extends MusicBeatState
 		titleImage = "freaky";
 		super.create();
 
-		if (!initialized)
-		{
-			#if !html5
-			Discord.changePresence('Beginning Game', 'Title Screen', " ", titleImage);
-			#end
-		}
-		else
-		{
-			#if !html5
-			Discord.changePresence('Menu Screen', 'Main Menu', " ", titleImage);
-			#end
-		}
-
+		
 		persistentUpdate = true;
 
 		GameOverSubstate.fishHadEnough = 0;
@@ -596,9 +584,7 @@ class TitleState extends MusicBeatState
 
 	function mainMenuSwitch()
 	{
-		#if !html5
-		Discord.changePresence('Menu Screen', 'Main Menu', " ", titleImage);
-		#end
+		
 		FlxTween.tween(logoBl, {y: -1000}, 1.2, {ease: FlxEase.backIn, onComplete: function(tween:FlxTween)
 		{
 			menuItems.forEach(function (spr:FlxSprite)
