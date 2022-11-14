@@ -4,7 +4,7 @@ import flixel.FlxG;
 import flixel.system.FlxSound;
 import meta.data.*;
 import meta.state.PlayState;
-import openfl.utils.Assets;
+import openfl.utils.Assets as OpenFlAssets;
 import sys.FileSystem;
 
 /**
