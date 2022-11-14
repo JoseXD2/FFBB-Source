@@ -109,7 +109,7 @@ class FreeplayState extends MusicBeatState
 		// LOAD MUSIC
 		// ForeverTools.resetMenuMusic();
 
-		#if !html5 
+		#if !android
 		Discord.changePresence('Ordering A Battle', 'Freeplay', " ", TitleState.titleImage);
 		#end
 
@@ -242,6 +242,10 @@ class FreeplayState extends MusicBeatState
 		loading.antialiasing = true;
 		loading.visible = false;
 		add(loading);
+		
+		#if android
+		addVirtualPad(LEFT_FULL, A_B);
+		#end
 	}
 
 	public function addSong(songName:String, weekNum:Int, songCharacter:String, songColor:FlxColor)
@@ -249,8 +253,8 @@ class FreeplayState extends MusicBeatState
 		///*
 		var coolDifficultyArray = [];
 		for (i in CoolUtil.difficultyArray)
-			if (FileSystem.exists(Paths.songJson(songName, songName + '-' + i))
-				|| (FileSystem.exists(Paths.songJson(songName, songName)) && i == "NORMAL"))
+			if (Assets.exists(Paths.songJson(songName, songName + '-' + i))
+				|| (Assets.exists(Paths.songJson(songName, songName)) && i == "NORMAL"))
 				coolDifficultyArray.push(i);
 
 		if (coolDifficultyArray.length > 0)
