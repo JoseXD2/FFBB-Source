@@ -94,13 +94,13 @@ class TitleState extends MusicBeatState
 
 		if (!initialized)
 		{
-			#if !android
+			#if !html5
 			Discord.changePresence('Beginning Game', 'Title Screen', " ", titleImage);
 			#end
 		}
 		else
 		{
-			#if !android
+			#if !html5
 			Discord.changePresence('Menu Screen', 'Main Menu', " ", titleImage);
 			#end
 		}
@@ -263,8 +263,6 @@ class TitleState extends MusicBeatState
 		add(loading);
 
 		updateSelection();
-		
-		
 
 		if (isMainMenu && initialized)
 			backToMain();
@@ -362,10 +360,14 @@ class TitleState extends MusicBeatState
 			});
 		}
 
-		#if android
+		#if mobile
 		for (touch in FlxG.touches.list)
+		{
 			if (touch.justPressed)
+			{
 				pressedEnter = true;
+			}
+		}
 		#end
 
 		var gamepad:FlxGamepad = FlxG.gamepads.lastActive;
@@ -590,13 +592,11 @@ class TitleState extends MusicBeatState
 		warningText.antialiasing = true;
 		warningText.screenCenter();
 		add(warningText);
-		
-		
 	}
 
 	function mainMenuSwitch()
 	{
-		#if !android
+		#if !html5
 		Discord.changePresence('Menu Screen', 'Main Menu', " ", titleImage);
 		#end
 		FlxTween.tween(logoBl, {y: -1000}, 1.2, {ease: FlxEase.backIn, onComplete: function(tween:FlxTween)
